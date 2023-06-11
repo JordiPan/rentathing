@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rentathing.controllers.InlogController">
+    <left>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="left-logo" BorderPane.alignment="CENTER" style="-fx-background-color: gray">
+            <children>
+                <ImageView fitHeight="161.0" fitWidth="162.0" layoutX="24.0" layoutY="117.0">
+                    <image>
+                    </image>
+                </ImageView>
+            </children></AnchorPane>
+    </left>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="login-pane" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="gebruikersnaam" layoutX="168.0" layoutY="192.0" promptText="gebruikersnaam" />
+                <Label fx:id="" layoutX="68.0" layoutY="249.0" text="Wachtwoord:" />
+                <Label layoutX="65.0" layoutY="193.0" text="Gebruikersnaam:" />
+                <PasswordField fx:id="wachtwoord" layoutX="168.0" layoutY="245.0" promptText="wachtwoord" />
+                <Button fx:id="login" layoutX="239.0" layoutY="305.0" mnemonicParsing="false" onAction="#inloggen" prefHeight="30.0" prefWidth="78.0" styleClass="login-button" text="Login" />
+                <Label fx:id="verkeerd" layoutX="26.0" layoutY="143.0" prefHeight="37.0" prefWidth="349.0" styleClass="error" textFill="RED" />
+<!--                <Button fx:id="registreren" layoutX="138.0" layoutY="305.0" mnemonicParsing="false" onAction="#accountRegistreren" prefHeight="30.0" prefWidth="92.0" styleClass="register" text="Registreren" underline="true" />-->
+                <Label layoutX="131.0" layoutY="59.0" text="Log in">
+                    <font>
+                        <Font size="46.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

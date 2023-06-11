@@ -5,10 +5,10 @@ import javafx.scene.control.Label;
 
 public class HoofdMenuController {
     @FXML
-    private Label welcomeText;
-
+    protected void overzicht() {}
+    @FXML
+    protected void beheer() {}
     @FXML
     protected void uitloggen() {
-        welcomeText.setText("Welcome to JavaFX Application!");
     }
 }
