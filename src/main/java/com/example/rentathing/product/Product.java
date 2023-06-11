@@ -15,6 +15,32 @@ public abstract class Product {
     //door welke medewerker is het verhuurd?
     private Medewerker medewerker;
 
+    public Product(String naam, boolean verhuurd, double huurprijs, ArrayList<Observer> observers, String klantVoornaam, String klantAchternaam, Medewerker medewerker) {
+        this.naam = naam;
+        this.verhuurd = verhuurd;
+        this.huurprijs = huurprijs;
+        this.observers = observers;
+        this.klantVoornaam = klantVoornaam;
+        this.klantAchternaam = klantAchternaam;
+        this.medewerker = medewerker;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public boolean isVerhuurd() {
+        return verhuurd;
+    }
+
+    public void setVerhuurd(boolean verhuurd) {
+        this.verhuurd = verhuurd;
+    }
+
     public double prijsBerekening() {
         double huur = berekenHuurprijs();
         double verzekering = berekenVerzekering();
