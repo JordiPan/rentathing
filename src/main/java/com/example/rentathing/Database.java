@@ -19,9 +19,9 @@ public class Database {
     private static ArrayList<Observer> observers = new ArrayList<>(medewerkers);
 
     public static ArrayList<Product> producten = new ArrayList<>(Arrays.asList(
-            new PersonenAuto("Volkswagen",false,400, observers,null, null, null,"Volkers", 1000,144),
-            new Vrachtauto("Big", false, 700, observers, null, null, null, 300,1500),
-            new Boormachine("Bosch driller", false,13, observers, null, null, null, "Bosch", "automatisch")
+            new PersonenAuto("Volkswagen",false,400,"persoon", observers,null, null, false,null,"Volkers", 1000,144),
+            new Vrachtauto("Big", false, 700,"vracht", observers, null, null, false, null, 300,1500),
+            new Boormachine("Bosch driller", false,13,"boor", observers, null, null, false,null, "Bosch", "automatisch")
     ));
 
 
