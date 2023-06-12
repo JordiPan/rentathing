@@ -2,6 +2,7 @@ package com.example.rentathing.controllers;
 
 import com.example.rentathing.Database;
 import com.example.rentathing.Main;
+import com.example.rentathing.SceneSwitcher;
 import com.example.rentathing.product.PersonenAuto;
 import com.example.rentathing.product.Product;
 import javafx.collections.FXCollections;
@@ -47,38 +48,37 @@ public class OverzichtController implements Initializable {
             Label label = new Label(product.getNaam()+" - verhuurd: "+ product.isVerhuurd());
             label.setStyle("-fx-border-color: black; -fx-padding: 10;");
 
+            //maak detailvenster wanneer erop geklikt wordt
             label.setOnMouseClicked((MouseEvent e) ->{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/rentathing/detail-view.fxml"));
-                DetailController detailController = new DetailController();
-                detailController.setProduct(product);
-                loader.setController(detailController);
-                Parent root = null;
-
-                try {
-                    root = (Parent) loader.load();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.initOwner(label.getScene().getWindow());
-                Stage huidigeStage = (Stage)((Node) e.getSource()).getScene().getWindow();
-                stage.setTitle(huidigeStage.getTitle());
-
-                stage.setOnHidden(new EventHandler<WindowEvent>() {
+                Stage kindStage = klikOpProductActie(product);
+                kindStage.show();
+                kindStage.setOnHidden(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent windowEvent) {
                         refresh();
                     }
                 });
-
-                stage.show();
             });
-//            list.getItems().add(product.getNaam() + " " + product.isVerhuurd());
             producten.getChildren().add(label);
         }
+    }
+
+    private Stage klikOpProductActie(Product product) {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("detail-view.fxml"));
+
+        DetailController detailController = new DetailController();
+        detailController.setProduct(product);
+
+        loader.setController(detailController);
+        Parent root = null;
+
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Stage huidigeStage = (Stage) producten.getScene().getWindow();
+        return SceneSwitcher.initModality(huidigeStage, root, huidigeStage.getTitle());
     }
 }

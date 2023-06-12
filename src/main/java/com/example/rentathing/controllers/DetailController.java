@@ -46,8 +46,9 @@ public class DetailController implements Initializable {
         knoppen.getChildren().add(new Label("kosten: "+ totaal));
         resetProduct();
     }
-    public void verhuren(Stage stage, String klantVoornaam, String klantAchternaam) {
+    public void verhuren(Stage stage, String klantVoornaam, String klantAchternaam, boolean verzekerd) {
         product.setVerhuurd(true);
+        product.setVerzekerd(verzekerd);
         product.setKlantVoornaam(klantVoornaam);
         product.setKlantAchternaam(klantAchternaam);
         product.setMedewerker(stage.getTitle());
@@ -88,7 +89,7 @@ public class DetailController implements Initializable {
             CheckBox verzekerd = new CheckBox("verzekeren?");
             Label prijsBerekening = new Label("");
             verzekerd.setOnMouseClicked((MouseEvent e) -> {
-                prijsBerekening.setText("Totaal prijs per dag: "+ product.prijsBerekening());
+                prijsBerekening.setText("Totaal prijs met verzekering per dag: "+ product.prijsBerekening());
             });
             productInformatie.getChildren().add(verzekerd);
             productInformatie.getChildren().add(prijsBerekening);
@@ -99,7 +100,7 @@ public class DetailController implements Initializable {
             Button verhuur = new Button("verhuren");
             verhuur.setOnMouseClicked((MouseEvent e) ->{
                 Stage stage =  (Stage)((Node) e.getSource()).getScene().getWindow();
-                verhuren(stage, klantVoornaam.getText(), klantAchternaam.getText());
+                verhuren(stage, klantVoornaam.getText(), klantAchternaam.getText(), verzekerd.isSelected());
             });
             knoppen.getChildren().add(klantVoornaam);
             knoppen.getChildren().add(klantAchternaam);
@@ -118,6 +119,7 @@ public class DetailController implements Initializable {
         print(new Label("medewerker: " + product.getMedewerker()));
         print(new Label("klant voornaam: " + product.getKlantVoornaam()));
         print(new Label("klant achternaam: " + product.getKlantAchternaam()));
+        print(new Label("verzekerd: " + product.isVerzekerd()));
     }
     public void printBoor(){
         Boormachine boor = (Boormachine) product;

@@ -65,6 +65,10 @@ public abstract class Product {
         this.medewerker = medewerker;
     }
 
+    public boolean isVerzekerd() {
+        return verzekerd;
+    }
+
     public String getMedewerker() {
         return medewerker;
     }
@@ -88,8 +92,7 @@ public abstract class Product {
     //berekent per dag kosten
     public double prijsBerekening() {
         double huur = berekenHuurprijs();
-        double verzekering = 0;
-        if (verzekerd){verzekering = berekenVerzekering();}
+        double verzekering = berekenVerzekering();
         return huur + verzekering;
     }
     public abstract double berekenHuurprijs();

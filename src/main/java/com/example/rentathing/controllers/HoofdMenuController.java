@@ -2,6 +2,7 @@ package com.example.rentathing.controllers;
 
 import com.example.rentathing.Main;
 import com.example.rentathing.Medewerker;
+import com.example.rentathing.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,16 +24,13 @@ public class HoofdMenuController {
     @FXML
     protected void overzicht() throws IOException {
         Parent root = new FXMLLoader(Main.class.getResource("overzicht-view.fxml")).load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(uitlog.getScene().getWindow());
-        stage.setScene(scene);
-        stage.setTitle(medewerker.getNaam());
-        stage.show();
+        SceneSwitcher.initModality(uitlog.getScene().getWindow(), root, medewerker.getNaam()).show();
     }
     @FXML
-    protected void beheer() {}
+    protected void beheer() throws IOException {
+        Parent root = new FXMLLoader(Main.class.getResource("beheer-view.fxml")).load();
+        SceneSwitcher.initModality(uitlog.getScene().getWindow(), root, medewerker.getNaam()).show();
+    }
     @FXML
     protected void uitloggen(ActionEvent e) {
         Stage stage = (Stage) uitlog.getScene().getWindow();
