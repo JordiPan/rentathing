@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Product {
     private String naam;
     private boolean verhuurd;
-    private double huurprijs;
+//    private double huurprijs;
     private String categorie;
     private ArrayList<Observer> observers;
     private String klantVoornaam;
@@ -17,21 +17,20 @@ public abstract class Product {
     //door welke medewerker is het verhuurd?
     private String medewerker;
 
-    public Product(String naam, boolean verhuurd, double huurprijs, String categorie, ArrayList<Observer> observers, String klantVoornaam, String klantAchternaam, boolean verzekerd, String medewerker) {
+    public Product(String naam, String categorie, ArrayList<Observer> observers) {
         this.naam = naam;
-        this.verhuurd = verhuurd;
-        this.huurprijs = huurprijs;
+        this.verhuurd = false;
         this.categorie = categorie;
         this.observers = observers;
-        this.klantVoornaam = klantVoornaam;
-        this.klantAchternaam = klantAchternaam;
-        this.verzekerd = verzekerd;
-        this.medewerker = medewerker;
+        this.klantVoornaam = null;
+        this.klantAchternaam = null;
+        this.verzekerd = false;
+        this.medewerker = null;
     }
 
-    public double getHuurprijs() {
-        return huurprijs;
-    }
+//    public double getHuurprijs() {
+//        return huurprijs;
+//    }
 
     public String getCategorie() {
         return categorie;

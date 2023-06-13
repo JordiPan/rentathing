@@ -45,7 +45,7 @@ public class OverzichtController implements Initializable {
     }
     public void printProducten() {
         for (Product product : Database.producten) {
-            Label label = new Label(product.getNaam()+" - verhuurd: "+ product.isVerhuurd());
+            Label label = new Label(product.getNaam()+" - verhuurd: "+ product.isVerhuurd() + " categorie: " + product.getCategorie());
             label.setStyle("-fx-border-color: black; -fx-padding: 10;");
 
             //maak detailvenster wanneer erop geklikt wordt

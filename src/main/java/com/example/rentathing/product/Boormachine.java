@@ -9,18 +9,25 @@ public class Boormachine extends Product {
     private String merk;
     private String type;
 
-    public Boormachine(String naam, boolean verhuurd, double huurprijs, String categorie, ArrayList<Observer> observers, String klantVoornaam, String klantAchternaam, boolean verzekerd, String medewerker, String merk, String type) {
-        super(naam, verhuurd, huurprijs, categorie, observers, klantVoornaam, klantAchternaam, verzekerd, medewerker);
+    public Boormachine(String naam, String categorie, ArrayList<Observer> observers, String merk, String type) {
+        super(naam, categorie, observers);
         this.merk = merk;
         this.type = type;
     }
-
     public String getMerk() {
         return merk;
     }
 
     public String getType() {
         return type;
+    }
+
+    public void setMerk(String merk) {
+        this.merk = merk;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

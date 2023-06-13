@@ -115,7 +115,7 @@ public class DetailController implements Initializable {
     public void printBasisInformatie() {
         print(new Label(product.getNaam()));
         print(new Label("verhuurd: " + product.isVerhuurd()));
-        print(new Label("huurprijs (per dag): " + product.getHuurprijs()));
+        print(new Label("huurprijs (per dag): " + product.berekenHuurprijs()));
         print(new Label("medewerker: " + product.getMedewerker()));
         print(new Label("klant voornaam: " + product.getKlantVoornaam()));
         print(new Label("klant achternaam: " + product.getKlantAchternaam()));

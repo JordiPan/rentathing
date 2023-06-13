@@ -9,8 +9,8 @@ public class Vrachtauto extends Product {
     private double motorInhoud;
     private double laadVermogen;
 
-    public Vrachtauto(String naam, boolean verhuurd, double huurprijs, String categorie, ArrayList<Observer> observers, String klantVoornaam, String klantAchternaam, boolean verzekerd, String medewerker, double motorInhoud, double laadVermogen) {
-        super(naam, verhuurd, huurprijs, categorie, observers, klantVoornaam, klantAchternaam, verzekerd, medewerker);
+    public Vrachtauto(String naam, String categorie, ArrayList<Observer> observers, double motorInhoud, double laadVermogen) {
+        super(naam, categorie, observers);
         this.motorInhoud = motorInhoud;
         this.laadVermogen = laadVermogen;
     }

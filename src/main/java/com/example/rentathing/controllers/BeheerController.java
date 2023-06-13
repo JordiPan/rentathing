@@ -15,6 +15,7 @@ public class BeheerController {
     @FXML
     public Text voegToe;
 
+    @FXML
     public void boormachine() throws IOException {
         veranderScene("maak-boormachine-view.fxml");
     }
@@ -26,11 +27,12 @@ public class BeheerController {
     }
     //dit kan ook in andere controllers
     private void veranderScene(String fxml) throws IOException {
-        Window parent = voegToe.getScene().getWindow();
-        //ik moet dit doen ipv parent.gettitle
+        System.out.println("ff");
+        Window huidigeScherm = voegToe.getScene().getWindow();
+        //ik moet dit doen ipv huidigeScherm.gettitle
         Stage stage = (Stage) voegToe.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
-        SceneSwitcher.initModality(parent,loader.load(), stage.getTitle());
+        SceneSwitcher.initModality(huidigeScherm,loader.load(), stage.getTitle()).show();
     }
 }

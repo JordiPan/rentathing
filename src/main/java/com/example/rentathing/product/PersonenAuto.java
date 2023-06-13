@@ -10,8 +10,8 @@ public class PersonenAuto extends Product {
     private double gewicht;
     private double motorInhoud;
 
-    public PersonenAuto(String naam, boolean verhuurd, double huurprijs, String categorie, ArrayList<Observer> observers, String klantVoornaam, String klantAchternaam, boolean verzekerd, String medewerker, String merk, double gewicht, double motorInhoud) {
-        super(naam, verhuurd, huurprijs, categorie, observers, klantVoornaam, klantAchternaam, verzekerd, medewerker);
+    public PersonenAuto(String naam, String categorie, ArrayList<Observer> observers, String merk, double gewicht, double motorInhoud) {
+        super(naam, categorie, observers);
         this.merk = merk;
         this.gewicht = gewicht;
         this.motorInhoud = motorInhoud;

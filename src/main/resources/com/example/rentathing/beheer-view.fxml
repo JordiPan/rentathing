@@ -10,7 +10,7 @@
       <Button fx:id="boormachine" layoutX="256.0" layoutY="94.0" mnemonicParsing="false" onAction="#boormachine" text="boormachine" />
       <Button fx:id="personenAuto" layoutX="254.0" layoutY="132.0" mnemonicParsing="false" onAction="#personenAuto" text="PersonenAuto" />
       <Button fx:id="vrachtauto" layoutX="254.0" layoutY="175.0" mnemonicParsing="false" onAction="#vrachtauto" text="Vrachtauto" />
-      <Text layoutX="227.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voeg toe">
+      <Text fx:id="voegToe" layoutX="227.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voeg toe">
          <font>
             <Font size="36.0" />
          </font>
