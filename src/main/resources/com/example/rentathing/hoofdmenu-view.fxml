@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="hoofdScherm" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rentathing.controllers.HoofdMenuController">
    <children>
@@ -9,5 +11,10 @@
       <Button fx:id="beheer" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#beheer" text="beheer" />
       <Button fx:id="uitlog" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#uitloggen" text="uitloggen" />
       <Button fx:id="notificaties" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#notificaties" text="notificaties" />
+      <ScrollPane layoutX="6.0" layoutY="193.0" prefHeight="200.0" prefWidth="594.0">
+         <content>
+            <VBox fx:id="meldingBox" prefHeight="200.0" prefWidth="591.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

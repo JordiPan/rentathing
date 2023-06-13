@@ -11,13 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HoofdMenuController {
     @FXML
-    private AnchorPane hoofdScherm;
+    public VBox meldingBox;
     @FXML
     private Button uitlog;
     private Medewerker medewerker;
@@ -40,13 +41,14 @@ public class HoofdMenuController {
 
     @FXML
     private void notificaties(ActionEvent e) {
+        meldingBox.getChildren().clear();
         if (!medewerker.getMeldingen().isEmpty()) {
             for (String melding : medewerker.getMeldingen()) {
-                hoofdScherm.getChildren().add(new Label(melding));
+                meldingBox.getChildren().add(new Label(melding));
             }
         }
         else {
-            hoofdScherm.getChildren().add(new Label("Geen notificaties"));
+            meldingBox.getChildren().add(new Label("Geen notificaties"));
         }
     }
     public void setMedewerker(Medewerker medewerker) {
