@@ -1,8 +1,11 @@
 package com.example.rentathing;
 
+import java.util.ArrayList;
+
 public class Medewerker implements Observer{
     private String naam;
     private String wachtwoord;
+    private ArrayList<String> meldingen = new ArrayList<>();
 
     public Medewerker(String naam, String wachtwoord) {
         this.naam = naam;
@@ -21,12 +24,11 @@ public class Medewerker implements Observer{
         return wachtwoord;
     }
 
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
+    public ArrayList<String> getMeldingen() {
+        return meldingen;
     }
 
-    public void melding(){
-
+    public void update(String melding){
+        meldingen.add(melding);
     }
-    public void update(){}
 }

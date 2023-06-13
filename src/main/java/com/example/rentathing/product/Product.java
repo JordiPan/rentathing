@@ -80,7 +80,7 @@ public abstract class Product {
         this.naam = naam;
     }
 
-    public boolean isVerhuurd() {
+    public boolean isVerhuurt() {
         return verhuurd;
     }
 
@@ -97,9 +97,9 @@ public abstract class Product {
     public abstract double berekenHuurprijs();
     public abstract double berekenVerzekering();
 
-    public void meldingGeven() {
+    public void meldingGeven(String melding) {
         for (Observer o : observers) {
-            o.update();
+            o.update(melding);
         }
     }
 

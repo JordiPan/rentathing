@@ -1,17 +1,13 @@
 package com.example.rentathing;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.io.IOException;
-
 public class SceneSwitcher {
-    public static Stage sceneWisselen(Parent root, String naam) {
+    public static Stage veranderStage(Parent root, String naam) {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -29,8 +25,8 @@ public class SceneSwitcher {
 //        stage.setTitle(naam);
 //        stage.show();
 //    }
-    public static Stage initModality(Window parent, Parent root, String naam){
-        Stage stage = sceneWisselen(root,naam);
+    public static Stage maakStageMetModality(Window parent, Parent root, String naam){
+        Stage stage = veranderStage(root,naam);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(parent);
         return stage;

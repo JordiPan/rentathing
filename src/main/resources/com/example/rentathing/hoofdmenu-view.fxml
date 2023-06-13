@@ -3,11 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rentathing.controllers.HoofdMenuController">
+<AnchorPane fx:id="hoofdScherm" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rentathing.controllers.HoofdMenuController">
    <children>
       <Button fx:id="overzicht" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#overzicht" text="overzicht" />
       <Button fx:id="beheer" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#beheer" text="beheer" />
       <Button fx:id="uitlog" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#uitloggen" text="uitloggen" />
+      <Button fx:id="notificaties" layoutX="15.0" layoutY="138.0" mnemonicParsing="false" onAction="#notificaties" text="notificaties" />
    </children>
 </AnchorPane>

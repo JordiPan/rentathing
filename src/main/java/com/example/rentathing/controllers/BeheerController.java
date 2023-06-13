@@ -4,7 +4,6 @@ import com.example.rentathing.Main;
 import com.example.rentathing.SceneSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -33,6 +32,6 @@ public class BeheerController {
         Stage stage = (Stage) voegToe.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
-        SceneSwitcher.initModality(huidigeScherm,loader.load(), stage.getTitle()).show();
+        SceneSwitcher.maakStageMetModality(huidigeScherm,loader.load(), stage.getTitle()).show();
     }
 }

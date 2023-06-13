@@ -1,11 +1,10 @@
 package com.example.rentathing.controllers;
 
-import com.example.rentathing.Medewerker;
+import com.example.rentathing.DetailPrinter;
 import com.example.rentathing.product.Boormachine;
 import com.example.rentathing.product.PersonenAuto;
 import com.example.rentathing.product.Product;
 import com.example.rentathing.product.Vrachtauto;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -17,9 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,7 +28,26 @@ public class DetailController implements Initializable {
 
     @FXML
     private VBox knoppen;
-    @FXML
+
+    private DetailPrinter detailPrinter;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        detailPrinter = new DetailPrinter(product);
+        detailPrinter.printBasisInformatie(productInformatie);
+
+        switch (product.getCategorie()) {
+            case "boor" -> detailPrinter.printBoor(productInformatie);
+            case "persoon" -> detailPrinter.printPersonenAuto(productInformatie);
+            case "vracht" -> detailPrinter.printVrachtauto(productInformatie);
+        }
+
+        if (product.isVerhuurt()) {
+            productIsVerhuurt();
+        }
+        else {
+            productInVoorraad();
+        }
+    }
 
     public void resetProduct() {
         product.setMedewerker(null);
@@ -44,6 +59,7 @@ public class DetailController implements Initializable {
         double totaal = product.prijsBerekening()*dag;
         knoppen.getChildren().clear();
         knoppen.getChildren().add(new Label("kosten: "+ totaal));
+        product.meldingGeven("Medewerker: " + product.getMedewerker() + " heeft " + product.getNaam() + " geretourneert.");
         resetProduct();
     }
     public void verhuren(Stage stage, String klantVoornaam, String klantAchternaam, boolean verzekerd) {
@@ -52,6 +68,8 @@ public class DetailController implements Initializable {
         product.setKlantVoornaam(klantVoornaam);
         product.setKlantAchternaam(klantAchternaam);
         product.setMedewerker(stage.getTitle());
+        System.out.println(product.getObservers().get(0));
+        product.meldingGeven("Medewerker: " + product.getMedewerker() + " heeft " + product.getNaam() + " verhuurt.");
         stage.close();
     }
 
@@ -59,82 +77,39 @@ public class DetailController implements Initializable {
         this.product = product;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        printBasisInformatie();
+    public void productIsVerhuurt() {
+        TextField dag = new TextField("hoeveelheid dagen gehuurd. Cijfers aub");
+        Button retour = new Button("retour");
 
-        switch (product.getCategorie()) {
-            case "boor" -> printBoor();
-            case "persoon" -> printPersonenAuto();
-            case "vracht" -> printVrachtauto();
-        }
+        //kan dit niet in detailprinter zetten omdat ik retour methode van detailcontroller nodig heb
+        retour.setOnMouseClicked((MouseEvent e) -> {
+            retour(Integer.parseInt(dag.getText()));
+        });
 
-        if (product.isVerhuurd()) {
-            try {
-                TextField dag = new TextField("hoeveelheid dagen gehuurd. Cijfers aub");
-                knoppen.getChildren().add(dag);
-
-                Button retour = new Button("retour");
-                retour.setOnMouseClicked((MouseEvent e) -> {
-                    retour(Integer.parseInt(dag.getText()));
-                });
-                knoppen.getChildren().add(retour);
-
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        else {
-            CheckBox verzekerd = new CheckBox("verzekeren?");
-            Label prijsBerekening = new Label("");
-            verzekerd.setOnMouseClicked((MouseEvent e) -> {
-                prijsBerekening.setText("Totaal prijs met verzekering per dag: "+ product.prijsBerekening());
-            });
-            productInformatie.getChildren().add(verzekerd);
-            productInformatie.getChildren().add(prijsBerekening);
-
-            TextField klantVoornaam = new TextField("klant voornaam");
-            TextField klantAchternaam = new TextField("klant achternaam");
-
-            Button verhuur = new Button("verhuren");
-            verhuur.setOnMouseClicked((MouseEvent e) ->{
-                Stage stage =  (Stage)((Node) e.getSource()).getScene().getWindow();
-                verhuren(stage, klantVoornaam.getText(), klantAchternaam.getText(), verzekerd.isSelected());
-            });
-            knoppen.getChildren().add(klantVoornaam);
-            knoppen.getChildren().add(klantAchternaam);
-            knoppen.getChildren().add(verhuur);
-        }
+        detailPrinter.print(knoppen, dag);
+        detailPrinter.print(knoppen, retour);
     }
 
-    //dit kan type node worden
-    public void print(Label label) {
-        productInformatie.getChildren().add(label);
-    }
-    public void printBasisInformatie() {
-        print(new Label(product.getNaam()));
-        print(new Label("verhuurd: " + product.isVerhuurd()));
-        print(new Label("huurprijs (per dag): " + product.berekenHuurprijs()));
-        print(new Label("medewerker: " + product.getMedewerker()));
-        print(new Label("klant voornaam: " + product.getKlantVoornaam()));
-        print(new Label("klant achternaam: " + product.getKlantAchternaam()));
-        print(new Label("verzekerd: " + product.isVerzekerd()));
-    }
-    public void printBoor(){
-        Boormachine boor = (Boormachine) product;
-        print(new Label( "merk: " + boor.getMerk()));
-        print(new Label( "type: " + boor.getType()));
-    }
-    public void printPersonenAuto(){
-        PersonenAuto personenAuto = (PersonenAuto) product;
-        print(new Label("merk " + personenAuto.getMerk()));
-        print(new Label("gewicht: " +personenAuto.getGewicht()));
-        print(new Label("motorinhoud: " +personenAuto.getMotorInhoud()));
-    }
-    public void printVrachtauto(){
-        Vrachtauto vrachtauto = (Vrachtauto) product;
-        print(new Label("laadvermogen: " +vrachtauto.getLaadVermogen()));
-        print(new Label("motorinhoud: " +vrachtauto.getMotorInhoud()));
+    public void productInVoorraad() {
+        CheckBox verzekerd = new CheckBox("verzekeren?");
+        Label prijsBerekening = new Label("");
+        TextField klantVoornaam = new TextField("klant voornaam");
+        TextField klantAchternaam = new TextField("klant achternaam");
+        Button verhuur = new Button("verhuren");
+
+        verzekerd.setOnMouseClicked((MouseEvent e) -> {
+            prijsBerekening.setText("Totaal prijs met verzekering per dag: "+ product.prijsBerekening());
+        });
+
+        verhuur.setOnMouseClicked((MouseEvent e) ->{
+            Stage stage =  (Stage)((Node) e.getSource()).getScene().getWindow();
+            verhuren(stage, klantVoornaam.getText(), klantAchternaam.getText(), verzekerd.isSelected());
+        });
+
+        detailPrinter.print(productInformatie, verzekerd);
+        detailPrinter.print(productInformatie, prijsBerekening);
+        detailPrinter.print(knoppen, klantVoornaam);
+        detailPrinter.print(knoppen, klantAchternaam);
+        detailPrinter.print(knoppen, verhuur);
     }
 }
