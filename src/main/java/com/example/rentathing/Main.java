@@ -15,7 +15,6 @@ import java.util.Arrays;
 
 public class Main extends Application {
 
-
     @Override
     public void start(Stage stage) throws IOException {
         Database.voegObserversToe();
